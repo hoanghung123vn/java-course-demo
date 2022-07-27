@@ -22,8 +22,8 @@ public class PriceRuleController {
         return priceRuleService.create(request);
     }
 
-    @PutMapping
-    public PriceRuleResponse update(@Valid @RequestBody PriceRuleRequest request) {
-        return priceRuleService.update(request);
+    @PutMapping("{id}")
+    public PriceRuleResponse update(@Valid @RequestBody PriceRuleRequest request, @PathVariable(name = "id") int id) {
+        return priceRuleService.update(request, id);
     }
 }

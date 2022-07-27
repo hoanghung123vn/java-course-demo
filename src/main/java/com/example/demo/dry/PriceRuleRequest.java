@@ -10,7 +10,7 @@ import java.util.Optional;
 @Getter
 @Setter
 public class PriceRuleRequest {
-    private int id;
+    private Integer id;
     private String discountCode;
     private String type;
     private BigDecimal amount;

@@ -2,6 +2,7 @@ package com.example.demo.dry;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,8 +27,8 @@ public class PriceRuleServiceImpl implements PriceRuleService {
     }
 
     @Override
-    public PriceRuleResponse update(PriceRuleRequest request) {
-        var priceRule = priceRuleRepository.findById(request.getId()).orElseThrow(RuntimeException::new);
+    public PriceRuleResponse update(PriceRuleRequest request, int id) {
+        var priceRule = priceRuleRepository.findById(id).orElseThrow(RuntimeException::new);
         priceRuleMapper.updateEntity(request, priceRule);
         priceRuleRepository.save(priceRule);
         return priceRuleMapper.toResponse(priceRule);

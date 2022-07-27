@@ -1,16 +1,24 @@
 package com.example.demo.dry;
 
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
+
+import java.util.Optional;
+import java.sql.Date;
 
 @Mapper(componentModel = "spring")
-public interface PriceRuleMapper {
-    PriceRuleResponse toResponse(PriceRuleEntity entity);
-
-    PriceRuleEntity toEntity(PriceRuleRequest request);
+public abstract class PriceRuleMapper {
+    abstract PriceRuleResponse toResponse(PriceRuleEntity entity);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateEntity(PriceRuleRequest request, @MappingTarget PriceRuleEntity entity);
+    @Mapping(source = "endAt", target = "endAt", qualifiedByName = "endAt")
+    abstract PriceRuleEntity toEntity(PriceRuleRequest request);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(source = "endAt", target = "endAt", qualifiedByName = "endAt")
+    abstract void updateEntity(PriceRuleRequest request, @MappingTarget PriceRuleEntity entity);
+
+    @Named("endAt")
+    public Date endAt(Optional<Date> endAt) {
+        return endAt.orElse(null);
+    }
 }

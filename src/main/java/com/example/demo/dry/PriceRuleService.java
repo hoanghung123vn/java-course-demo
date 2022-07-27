@@ -7,5 +7,5 @@ public interface PriceRuleService {
 
     PriceRuleResponse create(PriceRuleRequest request);
 
-    PriceRuleResponse update(PriceRuleRequest request);
+    PriceRuleResponse update(PriceRuleRequest request, int id);
 }
