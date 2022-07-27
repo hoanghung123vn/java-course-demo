@@ -29,11 +29,6 @@ public class DemoApplication implements CommandLineRunner {
         // container: ApplicationContext
         // dependencies: beans
         ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
-        var products = new ArrayList<Product>();
-        var productDao = new ProductDao(products);
-        var orderDao = new OrderDao(products);
-        productDao.setProducts(List.of(new Product(1, "xyz")));
-        System.out.println(orderDao.getProducts());
 
         // open close principle
         Rectangle rect = new Square();
